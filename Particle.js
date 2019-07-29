@@ -31,16 +31,11 @@ export default class Particle {
 
     getActiveRadius(frameCount) {
         const currentAnimationFrame = frameCount - this.initialFrame;
-        console.log({
-            frameCount,
-            currentAnimationFrame,
-            initialFrame: this.initialFrame,
-            noteLength: this.noteLength,
-        });
-        if (currentAnimationFrame < this.noteLength / 2) {
-            return this.easeInOut(currentAnimationFrame, INITIAL_RADIUS, MAXIMUM_RADIUS, this.noteLength / 4);
+
+        if (currentAnimationFrame <= Math.floor(this.noteLength / 2)) {
+            return this.easeInOut(currentAnimationFrame, INITIAL_RADIUS, MAXIMUM_RADIUS, Math.floor(this.noteLength / 2));
         }
-        return this.easeInOut(currentAnimationFrame, MAXIMUM_RADIUS, INITIAL_RADIUS, 3 * this.noteLength / 4);
+        return MAXIMUM_RADIUS - this.easeInOut(currentAnimationFrame - Math.floor(this.noteLength / 2), 0, MAXIMUM_RADIUS - INITIAL_RADIUS, Math.floor(this.noteLength / 2));
     }
 
     easeInOut(time, startValue, change, duration) {
@@ -48,7 +43,7 @@ export default class Particle {
         if (time < 1)  {
              return change / 2 * time * time + startValue;
         }
-   
+
         time--;
         return -change / 2 * (time * (time - 2) - 1) + startValue;
     }

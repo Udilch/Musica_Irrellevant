@@ -1,14 +1,16 @@
 import {
     INITIAL_RADIUS,
     MAXIMUM_RADIUS,
-    FRAME_RATE
+    FRAME_RATE,
+    PARTICLE_INCREMENT_FACTOR
 } from './Constants.js';
+import Sound from './Sound.js';
 
 export default class Particle {
     constructor(note) {
         this.note = note;
-        this.xInc = Math.random() / 50;
-        this.yInc = Math.random() / 50;
+        this.xInc = Math.random() / PARTICLE_INCREMENT_FACTOR;
+        this.yInc = Math.random() / PARTICLE_INCREMENT_FACTOR;
         this.xOff = 0;
         this.yOff = 0;
         this.radius = INITIAL_RADIUS;
@@ -26,6 +28,9 @@ export default class Particle {
         this.radius = this.noteLength ? this.getActiveRadius(frameCount) : INITIAL_RADIUS;
         if (this.noteLength === frameCount - this.initialFrame) {
             this.finishAnimation();
+        }
+        if (this.sound) {
+            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff);
         }
     }
 
@@ -52,12 +57,14 @@ export default class Particle {
         if (!this.noteLength) {
             this.initialFrame = initialFrame;
             this.noteLength = noteLength;
+            this.sound = new Sound(this.note, noteLength);
         }
     }
 
     finishAnimation() {
         this.initialFrame = 0;
         this.noteLength = 0;
+        delete this.sound;
     }
 
     getAmplitude() {

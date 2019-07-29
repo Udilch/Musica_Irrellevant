@@ -13,3 +13,6 @@ export const NOTES = [
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
 export const FRAME_RATE = 30;
+export const PARTICLE_INCREMENT_FACTOR = 50;
+export const ACTIVATION_FREQUENCY = 0.25;
+export const NOTE_LENGTH_FACTOR = 1;

@@ -1,7 +1,6 @@
-import { NOTES, FRAME_RATE } from './Constants.js';
+import { NOTES, FRAME_RATE, ACTIVATION_FREQUENCY, NOTE_LENGTH_FACTOR } from './Constants.js';
 import Particle from './Particle.js';
 import { getRandomNumber } from './Util.js';
-import { soParticules } from './Sound.js';
 
 var particles = [];
 
@@ -20,17 +19,15 @@ window.draw = () => {
     background('lightblue');
     fill('red');
     stroke('red');
-    if (frameCount % getRandomNumber(FRAME_RATE * 3) === 1) {
+    if (frameCount % getRandomNumber(FRAME_RATE * ACTIVATION_FREQUENCY) === 1) {
         const randomParticle = getRandomNumber(NOTES.length);
-        particles[randomParticle].startAnimation(frameCount, getRandomNumber((frameCount % FRAME_RATE) * 2) + 15);
+        particles[randomParticle].startAnimation(frameCount, getRandomNumber((frameCount % FRAME_RATE) * NOTE_LENGTH_FACTOR));
     }
     particles.forEach(particle => {
         particle.update(frameCount, width, height);
         ellipse(
             particle.xPos, particle.yPos, particle.radius, particle.radius
         );
-        soParticules();
-       
     });
     text(frameCount, width - 10, 12);
 }

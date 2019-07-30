@@ -30,7 +30,7 @@ export default class Particle {
             this.finishAnimation();
         }
         if (this.sound) {
-            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff);
+            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
         }
     }
 
@@ -68,6 +68,7 @@ export default class Particle {
     }
 
     getAmplitude() {
+        console.log(this.radius);
         return this.radius;
     }
 };

@@ -2,9 +2,7 @@ import { NOTES, FRAME_RATE, ACTIVATION_FREQUENCY, NOTE_LENGTH_FACTOR } from './
 import Particle from './Particle.js';
 import { getRandomNumber } from './Util.js';
 
-var particles = [];
-
-window.setup = () => {
+export const setup = particles => () => {
     createCanvas(windowWidth, windowHeight);
     fill(240, 255, 180);
     frameRate(FRAME_RATE);
@@ -15,7 +13,7 @@ window.setup = () => {
     NOTES.forEach(note => particles.push(new Particle(note)));
 }
 
-window.draw = () => {
+export const draw = particles => () => {
     background('lightblue');
     fill('red');
     stroke('red');

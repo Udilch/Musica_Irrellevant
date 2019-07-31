@@ -1,5 +1,6 @@
 import { FRAME_RATE,MAXIMUM_RADIUS } from "./Constants.js";
 import {getRandomDecimal, getRandomNumber} from "./Util.js";
+import Tone from 'tone';
 
 export default class Sound {
     constructor(note, noteLength) {
@@ -36,6 +37,6 @@ export default class Sound {
             this.fmsynth.modulationEnvelope.attack=radius*3/MAXIMUM_RADIUS;
         }
         this.fmsynth.detune.value=-yPos*2;
-           
+
     }
 }

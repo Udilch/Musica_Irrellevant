@@ -40,7 +40,7 @@ export const draw = particles => () => {
                 particle.xPos, particle.yPos, particle.radius, particle.radius
             );
         });
-        text(frameCount, width - 10, 12);   
+        text(frameCount, width - 10, 12);  
     }  
     
     else if(state === 'measurement') {
@@ -56,6 +56,7 @@ export const draw = particles => () => {
         fill('red');
         stroke('red');
         var myParticle = particles[concreteParticle];
+        myParticle.myParticleStop(width,height);
         if (frameCount % 30 === 1) {
             myParticle.myParticleAnimation(frameCount,30);
             singleCount++;
@@ -65,10 +66,8 @@ export const draw = particles => () => {
         if (singleCount===7) {
             state = 'caos';
             singleCount = 0;
-            concreteParticle = getRandomNumber(NOTES.length);
-            
-        }
-        
+            concreteParticle = getRandomNumber(NOTES.length); 
+        } 
     }
 }
 

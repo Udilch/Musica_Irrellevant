@@ -21,9 +21,17 @@ export default class Sound {
         this.panner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
             this.fmsynth.modulationIndex.value = radius;
-            this.fmsynth.modulationEnvelope.attack = radius*10/MAXIMUM_RADIUS;
+            this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
         }
         this.fmsynth.detune.value = yPos * DETUNE_FACTOR;
+    }
+    
+    particleSound(frameCount, xPos, yPos, xOff, yOff,radius) {
+        this.panner.pan.value = xPos / windowWidth * 2 - 1;
+        if (isFinite(radius)){
+            this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
+        }
+        
     }
    
 }

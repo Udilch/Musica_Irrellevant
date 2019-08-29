@@ -33,7 +33,7 @@ document.addEventListener('click',modifyVar);
 export const draw = particles => () => {
     
     if(state === 'caos'){
-        background('lightblue');
+        background('#FEFBF0');
         fill('red');
         stroke('red');
         if (frameCount % getRandomNumber(FRAME_RATE * ACTIVATION_FREQUENCY) === 1) {
@@ -51,7 +51,7 @@ export const draw = particles => () => {
     
     else if(state === 'ionian') {
         document.removeEventListener('click',modifyVar);
-        background('green');
+        background('pink');
         fill('white');
         stroke('white');
         particles.forEach(particle => {
@@ -112,7 +112,7 @@ export const draw = particles => () => {
             singleCount++;
         }
         text(frameCount, width - 10, 12);
-        if (singleCount===currentMode.sequence.length) {
+        if (singleCount === currentMode.sequence.length) {
             state = 'caos';
             singleCount = 0;
             currentMode = randomMode(particles);
@@ -123,7 +123,7 @@ export const draw = particles => () => {
     
     else if(state === 'phrygian') {
         document.removeEventListener('click',modifyVar);
-        background('yellow');
+        background('lightblue');
         fill('white');
         stroke('white');
         particles.forEach(particle => {
@@ -191,7 +191,7 @@ export const draw = particles => () => {
     
     else if(state === 'mixolydian') {
         document.removeEventListener('click',modifyVar);
-        background('blue');
+        background('#F6DD5F');
         fill('white');
         stroke('white');
         particles.forEach(particle => {
@@ -225,7 +225,7 @@ export const draw = particles => () => {
     
     else if(state === 'aeolyan') {
         document.removeEventListener('click',modifyVar);
-        background('pink');
+        background('lightgreen');
         fill('white');
         stroke('white');
         particles.forEach(particle => {

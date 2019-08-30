@@ -1,10 +1,9 @@
 import {
     INITIAL_RADIUS,
     MAXIMUM_RADIUS,
-    FRAME_RATE,
-    PARTICLE_INCREMENT_FACTOR
-} from './Constants.js';
-import Sound from './Sound.js';
+    PARTICLE_INCREMENT_FACTOR,
+} from './Constants';
+import Sound from './Sound';
 
 export default class Particle {
     constructor(note) {
@@ -31,25 +30,25 @@ export default class Particle {
             this.finishAnimation();
         }
         if (this.sound) {
-            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
+            this.sound.updateSound(this.xPos, this.yPos, this.radius);
         }
     }
-    
-    stop(width,height){
+
+    stop(width, height) {
         this.xPos = noise(this.xOff) * width;
         this.yPos = noise(this.yOff) * height;
         this.radius = INITIAL_RADIUS;
     }
-    
-    myParticleStop(width,height){
+
+    stopWhenInScale(width, height) {
         this.xPos = noise(this.xOff) * width;
         this.yPos = noise(this.yOff) * height;
         this.radius = this.noteLength ? this.getActiveRadius(frameCount) : INITIAL_RADIUS;
         if (this.noteLength === frameCount - this.initialFrame) {
             this.finishAnimation();
-        } 
+        }
         if (this.sound) {
-            this.sound.particleSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
+            this.sound.particleSound(this.xPos, this.yPos, this.radius);
         }
     }
 
@@ -86,14 +85,12 @@ export default class Particle {
         delete this.sound;
     }
 
-    getAmplitude() {
-        console.log(this.radius);
-        return this.radius;
-    }
-    
     myParticleAnimation(initialFrame, noteLength) {
+        if (this.noteLength) {
+            this.finishAnimation();
+        }
         this.initialFrame = initialFrame;
         this.noteLength = noteLength;
-        this.sound = new Sound(this.note, this.noteLength); 
+        this.sound = new Sound(this.note, this.noteLength);
     }
 };

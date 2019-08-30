@@ -30,7 +30,25 @@ export default class Particle {
             this.finishAnimation();
         }
         if (this.sound) {
-            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff);
+            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
+        }
+    }
+    
+    stop(width,height){
+        this.xPos = noise(this.xOff) * width;
+        this.yPos = noise(this.yOff) * height;
+        this.radius = INITIAL_RADIUS;
+    }
+    
+    myParticleStop(width,height){
+        this.xPos = noise(this.xOff) * width;
+        this.yPos = noise(this.yOff) * height;
+        this.radius = this.noteLength ? this.getActiveRadius(frameCount) : INITIAL_RADIUS;
+        if (this.noteLength === frameCount - this.initialFrame) {
+            this.finishAnimation();
+        } 
+        if (this.sound) {
+            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
         }
     }
 
@@ -68,6 +86,13 @@ export default class Particle {
     }
 
     getAmplitude() {
+        console.log(this.radius);
         return this.radius;
+    }
+    
+    myParticleAnimation(initialFrame, noteLength) {
+        this.initialFrame = initialFrame;
+        this.noteLength = noteLength;
+        this.sound = new Sound(this.note, this.noteLength);   
     }
 };

@@ -18,6 +18,7 @@ export default class Particle {
         this.yPos = 0;
         this.noteLength = 0;
         this.initialFrame = 0;
+        this.sound=this.sound;
     }
 
     update(frameCount, width, height) {
@@ -48,7 +49,7 @@ export default class Particle {
             this.finishAnimation();
         } 
         if (this.sound) {
-            this.sound.updateSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
+            this.sound.particleSound(frameCount, this.xPos, this.yPos, this.xOff, this.yOff,this.radius);
         }
     }
 
@@ -93,6 +94,6 @@ export default class Particle {
     myParticleAnimation(initialFrame, noteLength) {
         this.initialFrame = initialFrame;
         this.noteLength = noteLength;
-        this.sound = new Sound(this.note, this.noteLength);   
+        this.sound = new Sound(this.note, this.noteLength); 
     }
 };

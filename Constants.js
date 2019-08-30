@@ -13,7 +13,7 @@ export const NOTES = [
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
 export const FRAME_RATE = 30;
-export const PARTICLE_INCREMENT_FACTOR = 50;
+export const PARTICLE_INCREMENT_FACTOR = 10;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const STATE = 'caos';
@@ -23,3 +23,8 @@ export const EQ_LOW = -20;
 export const EQ_MID = -30;
 export const EQ_HI = -25;
 export const DETUNE_FACTOR = -2;
+export const ROOT_LENGTH = 100;
+export const SCALE_LENGTH = 20;
+export const ROOT_FREQUENCY = 200;
+export const SCALE_FREQUENCY = 6;
+

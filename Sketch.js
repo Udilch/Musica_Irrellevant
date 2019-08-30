@@ -1,17 +1,13 @@
-import { NOTES, FRAME_RATE, ACTIVATION_FREQUENCY, NOTE_LENGTH_FACTOR} from './Constants.js';
+import { NOTES, FRAME_RATE, ACTIVATION_FREQUENCY, NOTE_LENGTH_FACTOR, ROOT_LENGTH, SCALE_LENGTH, ROOT_FREQUENCY, SCALE_FREQUENCY } from './Constants.js';
 import Particle from './Particle.js';
-import { getRandomNumber, mouse } from './Util.js';
+import { getRandomNumber, mouse, randomMode } from './Util.js';
 
 
 var state = 'caos';
 var singleCount = 0;
+var currentMode;
 var concreteParticle = getRandomNumber(NOTES.length);
-function modify () {
-    state='measurement';
-    console.log(state);
-}
-
-document.addEventListener('click',modify);
+var root = 12;
 
 export const setup = particles => () => {
     createCanvas(windowWidth, windowHeight);
@@ -22,12 +18,22 @@ export const setup = particles => () => {
     textSize(10);
     textAlign(RIGHT);
     NOTES.forEach(note => particles.push(new Particle(note)));
-    console.log(state);
+    console.log(particles);
+    currentMode = randomMode(particles);
+    console.log(currentMode);
 }
 
+function modifyVar(){
+    state = currentMode.name;
+    console.log(currentMode.name);
+}
+
+document.addEventListener('click',modifyVar);
+
 export const draw = particles => () => {
+    
     if(state === 'caos'){
-        background('lightblue');
+        background('#FEFBF0');
         fill('red');
         stroke('red');
         if (frameCount % getRandomNumber(FRAME_RATE * ACTIVATION_FREQUENCY) === 1) {
@@ -43,7 +49,80 @@ export const draw = particles => () => {
         text(frameCount, width - 10, 12);  
     }  
     
-    else if(state === 'measurement') {
+    else if(state === 'ionian') {
+        document.removeEventListener('click',modifyVar);
+        background('pink');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        
+        text(frameCount, width - 10, 12);
+        if (singleCount===currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+            
+        }  
+    } 
+    
+    else if(state === 'dorian') {
+        document.removeEventListener('click',modifyVar);
+        background('grey');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        text(frameCount, width - 10, 12);
+        if (singleCount === currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
+        
+    }
+    
+    else if(state === 'phrygian') {
+        document.removeEventListener('click',modifyVar);
         background('lightblue');
         fill('white');
         stroke('white');
@@ -55,19 +134,162 @@ export const draw = particles => () => {
         });
         fill('red');
         stroke('red');
-        var myParticle = particles[concreteParticle];
-        myParticle.myParticleStop(width,height);
-        if (frameCount % 30 === 1) {
-            myParticle.myParticleAnimation(frameCount,30);
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
             singleCount++;
         }
-        ellipse(myParticle.xPos, myParticle.yPos, myParticle.radius, myParticle.radius);
         text(frameCount, width - 10, 12);
-        if (singleCount===7) {
+        if (singleCount===currentMode.sequence.length) {
             state = 'caos';
             singleCount = 0;
-            concreteParticle = getRandomNumber(NOTES.length); 
-        } 
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
+    }
+    
+    else if(state === 'lydian') {
+        document.removeEventListener('click',modifyVar);
+        background('orange');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        text(frameCount, width - 10, 12);
+        if (singleCount===currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
+    }
+    
+    else if(state === 'mixolydian') {
+        document.removeEventListener('click',modifyVar);
+        background('#F6DD5F');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        text(frameCount, width - 10, 12);
+        if (singleCount===currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
+    }
+    
+    else if(state === 'aeolyan') {
+        document.removeEventListener('click',modifyVar);
+        background('lightgreen');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        text(frameCount, width - 10, 12);
+        if (singleCount===currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
+    }
+    
+    else if(state === 'locryan') {
+        document.removeEventListener('click',modifyVar);
+        background('black');
+        fill('white');
+        stroke('white');
+        particles.forEach(particle => {
+            particle.stop(width, height);
+            ellipse(
+                particle.xPos, particle.yPos, particle.radius, particle.radius
+            );
+        });
+        fill('red');
+        stroke('red');
+        currentMode.sequence.forEach(particle => {
+            particle.myParticleStop(width, height);  
+            ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
+            
+        })
+        if (frameCount % ROOT_FREQUENCY === 1) {
+            particles[root].myParticleAnimation(frameCount,ROOT_LENGTH);
+        }
+        if (frameCount % SCALE_FREQUENCY === 1) {
+            currentMode.sequence[singleCount].myParticleAnimation(frameCount,SCALE_LENGTH);
+            singleCount++;
+        }
+        text(frameCount, width - 10, 12);
+        if (singleCount===currentMode.sequence.length) {
+            state = 'caos';
+            singleCount = 0;
+            currentMode = randomMode(particles);
+            document.addEventListener('click',modifyVar);
+        }
     }
 }
+
 

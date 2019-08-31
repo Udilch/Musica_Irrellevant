@@ -16,7 +16,7 @@ export const initModes = (particles) => {
             });
         }
         note = MODAL.modalRoot + MODAL.modes[mode].grade;
-        for (let i = 0; i <= 3; i++) {
+        for (let i = 0; i <= 2; i++) {
             MODAL.chordInterval.forEach(interval => {
                 MODAL.modes[mode].modalChord.push(particles[note]);
                 note += interval;

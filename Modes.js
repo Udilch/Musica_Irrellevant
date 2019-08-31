@@ -1,38 +1,54 @@
 import { getRandomNumber } from "./Util";
-import { INITIAL_NOTE_SCALE, MODES, SCALE_LENGTH } from "./Constants";
+import { INITIAL_NOTE_SCALE, MODAL, SCALE_LENGTH, CHORD_LENGTH } from "./Constants";
 import { drawParticle } from "./Canvas";
 
-const modesLength = Object.keys(MODES).length;
+const modesLength = Object.keys(MODAL.modes).length;
 
 export const initModes = (particles) => {
-    Object.keys(MODES).forEach(mode => {
-        let note = INITIAL_NOTE_SCALE;
+    MODAL.modalRoot = getRandomNumber(11) + 36;
+    console.log(Object.keys(MODAL.modes));
+    Object.keys(MODAL.modes).forEach(mode => {
+        let note = MODAL.modalRoot;
         for (let i = 0; i <= 4; i++) {
-            MODES[mode].sequence.forEach(interval => {
-                MODES[mode].scale.push(particles[note]);
+            MODAL.modes[mode].sequence.forEach(grade => {
+                MODAL.modes[mode].scale.push(particles[note]);
+                note += grade;
+            });
+        }
+        note = MODAL.modalRoot + MODAL.modes[mode].grade;
+        for (let i = 0; i <= 3; i++) {
+            MODAL.chordInterval.forEach(interval => {
+                MODAL.modes[mode].modalChord.push(particles[note]);
                 note += interval;
             });
         }
     });
-    console.log(MODES);
-    return MODES;
+    console.log(MODAL);
+    return MODAL;
 };
 
 export const stopParticlesInScale = mode =>
-    MODES[mode].scale.forEach(particle =>
+    MODAL.modes[mode].scale.forEach(particle =>
         particle.stopWhenInScale(width, height)
     );
 
 export const drawParticlesInScale = mode =>
-    MODES[mode].scale.forEach(drawParticle);
+    MODAL.modes[mode].scale.forEach(drawParticle);
 
 export const animateScaleParticle = (mode, scaleIndex, frame) =>
-    MODES[mode].scale[scaleIndex].myParticleAnimation(frame, SCALE_LENGTH);
+    MODAL.modes[mode].scale[scaleIndex].myParticleAnimation(frame, SCALE_LENGTH);
 
+export const animateChordParticle = (mode, chordIndex, frame) => {
+    MODAL.modes[mode].modalChord[chordIndex].myParticleAnimation(frame, CHORD_LENGTH);
+}
+    
 export const getRandomMode = () => {
     const modesIndex = getRandomNumber(modesLength);
-    const mode = Object.keys(MODES)[modesIndex];
-    return MODES[mode];
+    const mode = Object.keys(MODAL.modes)[modesIndex];
+    return MODAL.modes[mode];
 };
 
-export const getModeScaleLength = mode => MODES[mode].scale.length;
+export const getModeScaleLength = mode => MODAL.modes[mode].scale.length;
+
+export const getModeChordLength = mode => MODAL.modes[mode].modalChord.length;
+

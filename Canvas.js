@@ -1,4 +1,4 @@
-import { FRAME_RATE, MODES, DEFAULT_PARTICLE_COLOR, DEFAULT_BACKGROUND_COLOR } from "./Constants";
+import { FRAME_RATE, MODAL, DEFAULT_PARTICLE_COLOR, DEFAULT_BACKGROUND_COLOR } from "./Constants";
 
 export const initCanvas = () => {
     createCanvas(windowWidth, windowHeight);
@@ -21,9 +21,9 @@ export const setCaosCanvas = () => {
 }
 
 export const setCanvasColorsByMode = mode => {
-    background(MODES[mode].backgroundColor);
-    fill(MODES[mode].color);
-    stroke(MODES[mode].color);
+    background(MODAL.modes[mode].backgroundColor);
+    fill(MODAL.modes[mode].color);
+    stroke(MODAL.modes[mode].color);
 }
 
 export const setDefaultParticleColor = () => {

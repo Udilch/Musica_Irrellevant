@@ -1,4 +1,4 @@
-import { NOTES, NOTE_LENGTH_FACTOR, FRAME_RATE, ROOT_INDEX, ROOT_LENGTH } from "./Constants";
+import { NOTES, NOTE_LENGTH_FACTOR, FRAME_RATE, ROOT_INDEX, ROOT_LENGTH, MODAL } from "./Constants";
 import Particle from "./Particle";
 import { getRandomNumber } from "./Util";
 import { drawParticle } from "./Canvas";
@@ -26,5 +26,9 @@ export const stopParticles = () =>
 
 export const drawParticles = () => particles.forEach(drawParticle);
 
-export const animateRoot = frame =>
-    particles[ROOT_INDEX].myParticleAnimation(frame, ROOT_LENGTH);
+export const animateRoot = frame => {
+    const currentRoot = MODAL.modalRoot - 24;
+    particles[currentRoot].myParticleAnimation(frame, ROOT_LENGTH);
+    particles[currentRoot + 12].myParticleAnimation(frame, ROOT_LENGTH);
+}
+    

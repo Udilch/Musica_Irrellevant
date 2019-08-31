@@ -30,5 +30,14 @@ export default class Sound {
         }
 
     }
+    
+    stopSound(xPos, yPos, radius) {
+        this.panner.pan.value = xPos / windowWidth * 2 - 1;
+        if (isFinite(radius)){
+            this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
+            
+        }
+
+    }
 
 }

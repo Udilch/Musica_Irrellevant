@@ -3,6 +3,7 @@ import {
     MAXIMUM_RADIUS,
     PARTICLE_INCREMENT_FACTOR,
 } from './Constants';
+
 import Sound from './Sound';
 
 export default class Particle {
@@ -34,10 +35,16 @@ export default class Particle {
         }
     }
 
-    stop(width, height) {
+    stop(width, height,) {
         this.xPos = noise(this.xOff) * width;
         this.yPos = noise(this.yOff) * height;
-        this.radius = INITIAL_RADIUS;
+        this.radius = this.noteLength ? this.getActiveRadius(frameCount) : INITIAL_RADIUS;
+        if (this.noteLength === frameCount - this.initialFrame) {
+            this.finishAnimation();
+        }
+        if (this.sound) {
+            this.sound.stopSound(this.xPos, this.yPos, this.radius);
+        }
     }
 
     stopWhenInScale(width, height) {

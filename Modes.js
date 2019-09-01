@@ -53,7 +53,11 @@ export const drawParticlesInMode = mode => {
 }
     
 export const animateScaleParticle = (mode, scaleIndex, frame) =>
+<<<<<<< Updated upstream
     MODAL.modes[mode].scale[MODAL.playScaleSequence[scaleIndex]].myParticleAnimation(frame, SCALE_LENGTH);
+=======
+    MODAL.modes[mode].scale[scaleIndex].myParticleAnimation(frame, SCALE_LENGTH);
+>>>>>>> Stashed changes
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
     MODAL.modes[mode].modalChord[chordIndex].myParticleAnimation(frame, CHORD_LENGTH);

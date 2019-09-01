@@ -87,7 +87,7 @@ const drawModeAnimationFrame = (mode,currentModes) => {
     }
     
     if (frameShouldAnimateChordParticle(frameCount)) {
-        if (chordIndex === 10) {
+        if (chordIndex === 15) {
             chordIndex = 0;
         }
         animateChordParticle(mode, chordIndex, frameCount);

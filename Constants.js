@@ -11,7 +11,7 @@ export const NOTES = [
     "C9"
 ];
 export const MODAL = {
-    modalRoot: 0,
+    modalRoot: { root: 0, scale: [], },
     chordInterval: [4,2,5,1],
     modes: {
             ionian: {
@@ -51,6 +51,7 @@ export const MODAL = {
             },
         },
 };
+export const OCTAVE = 12;
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
 export const FRAME_RATE = 30;
@@ -58,12 +59,12 @@ export const PARTICLE_INCREMENT_FACTOR = 20;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
-export const ROOT_LENGTH = 140;
-export const SCALE_LENGTH = 8;
-export const CHORD_LENGTH = 16;
-export const ROOT_FREQUENCY = 100;
-export const SCALE_FREQUENCY = 6;
-export const CHORD_FREQUENCY = 12;
+export const ROOT_LENGTH = 20;
+export const SCALE_LENGTH = 5;
+export const CHORD_LENGTH = 15;
+export const ROOT_FREQUENCY = 4;
+export const SCALE_FREQUENCY = 5;
+export const CHORD_FREQUENCY = 3;
 export const INITIAL_NOTE_SCALE = 48;
 export const DEFAULT_PARTICLE_COLOR = 'red';
 export const DEFAULT_BACKGROUND_COLOR = 'lightblue';

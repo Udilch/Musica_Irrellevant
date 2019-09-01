@@ -27,14 +27,17 @@ import {
     drawParticlesInScale,
     getModeScaleLength,
     getModeChordLength,
+    getRootLength,
     animateScaleParticle,
     animateChordParticle,
+    animateRootParticle,
 } from './Modes.js';
 
 
 var state = 'caos';
 var scaleIndex = 0;
 var chordIndex = 0;
+var rootIndex = 0;
 
 export const setup = () => {
     initCanvas();
@@ -76,23 +79,26 @@ const drawModeAnimationFrame = (mode,currentModes) => {
     stopParticlesInScale(mode);
     drawParticlesInScale(mode);
 
-    if (frameShouldAnimateRootParticle(frameCount)) {
-        setDefaultParticleColor();
-        animateRoot(frameCount);
-    }
-
     if (frameShouldAnimateScaleParticle(frameCount)) {
         animateScaleParticle(mode, scaleIndex, frameCount);
         scaleIndex++;
     }
     
-    if (frameShouldAnimateChordParticle(frameCount)) {
-        if (chordIndex === 10) {
+    if (frameShouldAnimateChordParticle(frameCount, mode)) {
+        if (chordIndex === getModeChordLength(mode)) {
             chordIndex = 0;
         }
         animateChordParticle(mode, chordIndex, frameCount);
         chordIndex++;
         
+    }
+    
+    if (frameShouldAnimateRootParticle(frameCount)) {
+        if (rootIndex === 5) {
+            rootIndex = 0;
+        }
+        animateRootParticle(rootIndex, frameCount);
+        rootIndex++;
     }
 
     if (frameShouldFinishModeAnimation(scaleIndex, mode)) {
@@ -108,7 +114,7 @@ const frameShouldAnimateRootParticle = frame => frame % ROOT_FREQUENCY === 0;
 
 const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
 
-const frameShouldAnimateChordParticle = frame => frame % CHORD_FREQUENCY === 0;
+const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
 
 const frameShouldFinishModeAnimation = (scaleIndex, mode) =>
     scaleIndex === getModeScaleLength(mode);

@@ -95,7 +95,7 @@ const drawModeAnimationFrame = (mode,currentModes) => {
     
     if (frameShouldAnimateRootParticle(frameCount)) {
         if (rootIndex === 5) {
-            rootIndex = getRandomNumber(5);
+            rootIndex = 0;
         }
         animateRootParticle(rootIndex, frameCount);
         rootIndex++;

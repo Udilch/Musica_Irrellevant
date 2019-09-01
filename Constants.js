@@ -51,6 +51,7 @@ export const MODAL = {
             },
         },
 };
+export const COUNT_DOWN = 15;
 export const OCTAVE = 12;
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
@@ -60,10 +61,10 @@ export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
 export const ROOT_LENGTH = 20;
-export const SCALE_LENGTH = 16;
+export const SCALE_LENGTH = 27;
 export const CHORD_LENGTH = 15;
 export const ROOT_FREQUENCY = 4;
-export const SCALE_FREQUENCY = 7;
+export const SCALE_FREQUENCY = 14;
 export const CHORD_FREQUENCY = 3;
 export const DEFAULT_PARTICLE_COLOR = 'red';
 export const DEFAULT_BACKGROUND_COLOR = 'lightblue';

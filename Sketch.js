@@ -4,6 +4,7 @@ import {
     ROOT_FREQUENCY,
     SCALE_FREQUENCY,
     CHORD_FREQUENCY,
+    COUNT_DOWN,
 } from './Constants.js';
 import { getRandomNumber } from './Util.js';
 import {
@@ -35,7 +36,7 @@ import {
 
 
 var state = 'caos';
-var scaleIndex = 0;
+var melodyIndex = 0;
 var chordIndex = 0;
 var rootIndex = 0;
 
@@ -80,8 +81,8 @@ const drawModeAnimationFrame = (mode) => {
     drawParticlesInMode(mode);
 
     if (frameShouldAnimateScaleParticle(frameCount)) {
-        animateScaleParticle(mode, scaleIndex, frameCount);
-        scaleIndex++;
+        animateScaleParticle(mode, melodyIndex, frameCount);
+        melodyIndex++;
     }
     
     if (frameShouldAnimateChordParticle(frameCount, mode)) {
@@ -101,9 +102,9 @@ const drawModeAnimationFrame = (mode) => {
         rootIndex++;
     }
 
-    if (frameShouldFinishModeAnimation(scaleIndex, mode)) {
+    if (frameShouldFinishModeAnimation(melodyIndex, mode)) {
         state = 'caos';
-        scaleIndex = 0;
+        melodyIndex = 0;
         document.addEventListener('click', alterState);
     }
 }
@@ -116,5 +117,5 @@ const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
 
 const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
 
-const frameShouldFinishModeAnimation = (scaleIndex, mode) =>
-    scaleIndex === getModeScaleLength(mode);
+const frameShouldFinishModeAnimation = (melodyIndex, mode) =>
+    melodyIndex === COUNT_DOWN;

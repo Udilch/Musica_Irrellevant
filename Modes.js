@@ -20,7 +20,7 @@ export const initModes = (particles) => {
             });
         }
         note = MODAL.modalRoot.root + MODAL.modes[mode].grade + OCTAVE * 2;
-        for (let i = 0; i <= 3; i++) {
+        for (let i = 0; i <= 4; i++) {
             MODAL.chordInterval.forEach(interval => {
                 MODAL.modes[mode].modalChord.push(particles[note]);
                 note += interval;
@@ -52,7 +52,7 @@ export const drawParticlesInMode = mode => {
     MODAL.modalRoot.scale.forEach(drawParticle); 
 }
     
-export const animateScaleParticle = (mode, melodyIndex, frame) =>
+export const animateScaleParticle = (mode, scaleIndex, frame) =>
     MODAL.modes[mode].scale[getRandomNumber(getModeScaleLength(mode))].myParticleAnimation(frame, SCALE_LENGTH);
 
 export const animateChordParticle = (mode, chordIndex, frame) => {

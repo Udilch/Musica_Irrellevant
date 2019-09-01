@@ -50,10 +50,9 @@ const alterState = () => {
 }
 
 document.addEventListener('click', alterState);
+document.addEventListener('touchstart', alterState);
 
 export const draw = () => {
-    text(frameCount, width - 10, 12);
-
     state === 'caos' ? drawCaosFrame() : drawModeAnimationFrame(state);
 }
 
@@ -68,6 +67,7 @@ const drawCaosFrame = () => {
 
 const drawModeAnimationFrame = (mode) => {
     document.removeEventListener('click', alterState);
+    document.removeEventListener('touchstart', alterState);
 
     // draw regular particles
     setCanvasColorsByMode(mode);
@@ -105,6 +105,7 @@ const drawModeAnimationFrame = (mode) => {
         state = 'caos';
         scaleIndex = 0;
         document.addEventListener('click', alterState);
+        document.addEventListener('touchstart', alterState);
     }
 }
 const frameShouldActivateParticle = frame =>
@@ -117,4 +118,4 @@ const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
 const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
 
 const frameShouldFinishModeAnimation = (scaleIndex, mode) =>
-    scaleIndex === getModeScaleLength(mode);
+    scaleIndex === 16;

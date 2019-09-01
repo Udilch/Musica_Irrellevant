@@ -12,8 +12,8 @@ export const initModes = (particles) => {
             note += OCTAVE;
     };
     Object.keys(MODAL.modes).forEach(mode => {
-        note = MODAL.modalRoot.root + (OCTAVE * 4);
-        for (let i = 0; i <= 3; i++) {
+        note = MODAL.modalRoot.root + (OCTAVE * 3);
+        for (let i = 0; i <= 4; i++) {
             MODAL.modes[mode].sequence.forEach(grade => {
                 MODAL.modes[mode].scale.push(particles[note]);
                 note += grade;
@@ -53,7 +53,7 @@ export const drawParticlesInMode = mode => {
 }
     
 export const animateScaleParticle = (mode, scaleIndex, frame) =>
-    MODAL.modes[mode].scale[getRandomNumber(getModeScaleLength(mode))].myParticleAnimation(frame, SCALE_LENGTH);
+    MODAL.modes[mode].scale[MODAL.playScaleSequence[scaleIndex]].myParticleAnimation(frame, SCALE_LENGTH);
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
     MODAL.modes[mode].modalChord[chordIndex].myParticleAnimation(frame, CHORD_LENGTH);

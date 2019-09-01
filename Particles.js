@@ -26,9 +26,4 @@ export const stopParticles = () =>
 
 export const drawParticles = () => particles.forEach(drawParticle);
 
-export const animateRoot = frame => {
-    const currentRoot = MODAL.modalRoot - 24;
-    particles[currentRoot].myParticleAnimation(frame, ROOT_LENGTH);
-    particles[currentRoot + 12].myParticleAnimation(frame, ROOT_LENGTH);
-}
     

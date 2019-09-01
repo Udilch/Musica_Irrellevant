@@ -23,8 +23,8 @@ import {
 import {
     initModes,
     getRandomMode,
-    stopParticlesInScale,
-    drawParticlesInScale,
+    stopParticlesInMode,
+    drawParticlesInMode,
     getModeScaleLength,
     getModeChordLength,
     getRootLength,
@@ -66,7 +66,7 @@ const drawCaosFrame = () => {
     drawParticles();
 };
 
-const drawModeAnimationFrame = (mode,currentModes) => {
+const drawModeAnimationFrame = (mode) => {
     document.removeEventListener('click', alterState);
 
     // draw regular particles
@@ -76,8 +76,8 @@ const drawModeAnimationFrame = (mode,currentModes) => {
 
     // draw in scale particles
     setDefaultParticleColor();
-    stopParticlesInScale(mode);
-    drawParticlesInScale(mode);
+    stopParticlesInMode(mode);
+    drawParticlesInMode(mode);
 
     if (frameShouldAnimateScaleParticle(frameCount)) {
         animateScaleParticle(mode, scaleIndex, frameCount);

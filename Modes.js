@@ -34,24 +34,14 @@ export const initModes = (particles) => {
     return MODAL;
 };
 
-export const stopParticlesInMode = (mode) => {
+export const stopParticlesInScale = mode =>
     MODAL.modes[mode].scale.forEach(particle =>
         particle.stopWhenInScale(width, height)
     );
-    MODAL.modes[mode].modalChord.forEach(particle =>
-        particle.stopWhenInScale(width, height)
-    );
-    MODAL.modalRoot.scale.forEach(particle =>
-        particle.stopWhenInScale(width, height)
-    ); 
-}
 
-export const drawParticlesInMode = mode => {
+export const drawParticlesInScale = mode =>
     MODAL.modes[mode].scale.forEach(drawParticle);
-    MODAL.modes[mode].modalChord.forEach(drawParticle);
-    MODAL.modalRoot.scale.forEach(drawParticle); 
-}
-    
+
 export const animateScaleParticle = (mode, scaleIndex, frame) =>
     MODAL.modes[mode].scale[getRandomNumber(getModeScaleLength(mode))].myParticleAnimation(frame, SCALE_LENGTH);
 
@@ -60,7 +50,7 @@ export const animateChordParticle = (mode, chordIndex, frame) => {
 }
 
 export const animateRootParticle = (rootIndex, frame) => {
-    MODAL.modalRoot.scale[getRandomNumber(5)].myParticleAnimation(frame, ROOT_LENGTH);
+    MODAL.modalRoot.scale[rootIndex].myParticleAnimation(frame, ROOT_LENGTH);
 }
     
 export const getRandomMode = () => {
@@ -73,5 +63,5 @@ export const getModeScaleLength = mode => MODAL.modes[mode].scale.length;
 
 export const getModeChordLength = mode => MODAL.modes[mode].modalChord.length;
 
-export const getRootLength = MODAL.modalRoot.scale.length;
+export const getRootLength = MODAL => MODAL.modalRoot.scale.length;
 

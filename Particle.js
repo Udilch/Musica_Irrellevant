@@ -35,7 +35,7 @@ export default class Particle {
         }
     }
 
-    stop(width, height) {
+    stop(width, height,) {
         this.xPos = noise(this.xOff) * width;
         this.yPos = noise(this.yOff) * height;
         this.radius = this.noteLength ? this.getActiveRadius(frameCount) : INITIAL_RADIUS;

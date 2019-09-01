@@ -22,6 +22,7 @@ export const initModes = (particles) => {
                 note += interval;
             });
         }
+        MODAL.modes[mode].scale.push(particles[MODAL.modalRoot + 60])
     });
     console.log(MODAL);
     return MODAL;
@@ -39,7 +40,7 @@ export const animateScaleParticle = (mode, scaleIndex, frame) =>
     MODAL.modes[mode].scale[scaleIndex].myParticleAnimation(frame, SCALE_LENGTH);
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
-    MODAL.modes[mode].modalChord[chordIndex].myParticleAnimation(frame, CHORD_LENGTH);
+    MODAL.modes[mode].modalChord[getRandomNumber(12)].myParticleAnimation(frame, CHORD_LENGTH);
 }
     
 export const getRandomMode = () => {

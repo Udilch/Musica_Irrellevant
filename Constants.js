@@ -10,21 +10,61 @@ export const NOTES = [
     "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8",
     "C9"
 ];
+export const MODAL = {
+    modalRoot: { root: 0, scale: [], },
+    chordInterval: [4,2,5,1],
+    playScaleSequence: [14,15,16,17,18,19,20,21,20,19,18,17,16,15,14,14],
+    modes: {
+            ionian: {
+                name: "ionian", scale: [], sequence: [2, 2, 1, 2, 2, 2, 1],
+                modalChord:[], grade: 5, backgroundColor: 'green',
+                color: 'white',
+            },
+            dorian: {
+                name: "dorian", scale: [], sequence: [2, 1, 2, 2, 2, 1, 2],
+                modalChord:[], grade: 3, backgroundColor: 'grey',
+                color: 'white',
+            },
+            phrygian: {
+                name: "phrygian", scale: [], sequence: [1, 2, 2, 2, 1, 2, 2],
+                modalChord:[], grade: 1, backgroundColor: 'yellow',
+                color: 'white',
+            },
+            lydian: {
+                name: "lydian", scale: [], sequence: [2, 2, 2, 1, 2, 2, 1],
+                modalChord:[], grade: 0, backgroundColor: 'orange',
+                color: 'white',
+            },
+            mixolydian: {
+                name: "mixolydian", scale: [], sequence: [2, 2, 1, 2, 2, 1, 2],
+                modalChord:[], grade: 10, backgroundColor: 'blue',
+                color: 'white',
+            },
+            aeolyan: {
+                name: "aeolyan", scale: [], sequence: [2, 1, 2, 2, 1, 2, 2],
+                modalChord:[], grade: 8, backgroundColor: 'pink',
+                color: 'white',
+            },
+            locryan: {
+                name: "locryan", scale: [], sequence: [1, 2, 2, 1, 2, 2, 2],
+                modalChord:[], grade: 6, backgroundColor: 'black',
+                color: 'white',
+            },
+        },
+};
+export const OCTAVE = 12;
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
 export const FRAME_RATE = 30;
-export const PARTICLE_INCREMENT_FACTOR = 10;
+export const PARTICLE_INCREMENT_FACTOR = 20;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
-export const STATE = 'caos';
-export const DAMPENING_VALUE = 1000;
-export const ROOM_SIZE_VALUE = 0.8;
-export const EQ_LOW = -20;
-export const EQ_MID = -30;
-export const EQ_HI = -25;
-export const DETUNE_FACTOR = -2;
-export const ROOT_LENGTH = 100;
-export const SCALE_LENGTH = 20;
-export const ROOT_FREQUENCY = 200;
-export const SCALE_FREQUENCY = 6;
-
+export const ROOT_INDEX = 12;
+export const ROOT_LENGTH = 20;
+export const SCALE_LENGTH = 4;
+export const CHORD_LENGTH = 15;
+export const ROOT_FREQUENCY = 8;
+export const SCALE_FREQUENCY = 7;
+export const CHORD_FREQUENCY = 3;
+export const DEFAULT_PARTICLE_COLOR = 'red';
+export const DEFAULT_BACKGROUND_COLOR = 'lightblue';

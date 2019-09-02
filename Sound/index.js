@@ -1,23 +1,20 @@
-import { FRAME_RATE,MAXIMUM_RADIUS,DAMPENING_VALUE,ROOM_SIZE_VALUE,EQ_HI, EQ_MID, EQ_LOW, DETUNE_FACTOR} from "./Constants.js";
-import {getRandomNumber} from "./Util.js";
+import { FRAME_RATE, MAXIMUM_RADIUS } from '../Constants';
+import { DETUNE_FACTOR } from "./Constants";
 import Tone from 'tone';
+import Master from "./Master";
 
 export default class Sound {
     constructor(note, noteLength) {
         this.note = note;
         this.noteLength = noteLength;
         this.panner = new Tone.Panner();
-        this.eq = new Tone.EQ3(EQ_HI,EQ_MID,EQ_LOW);
-        this.reverb = new Tone.Freeverb();
-        this.reverb.dampening.value = DAMPENING_VALUE;
-        this.reverb.roomSize.value = ROOM_SIZE_VALUE;
-        this.fmsynth = new Tone.FMSynth().chain(this.reverb,this.panner,this.eq,Tone.Master);
+        this.fmsynth = new Tone.FMSynth().chain(this.panner, Master);
         this.fmsynth.oscillator.type = "sine";
         this.fmsynth.modulation.type = "square";
         this.fmsynth.triggerAttackRelease(this.note, this.noteLength / FRAME_RATE);
     }
 
-    updateSound(frameCount, xPos, yPos, xOff, yOff,radius) {
+    updateSound(xPos, yPos, radius) {
         this.panner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
             this.fmsynth.modulationIndex.value = radius;
@@ -25,13 +22,22 @@ export default class Sound {
         }
         this.fmsynth.detune.value = yPos * DETUNE_FACTOR;
     }
-    
-    particleSound(frameCount, xPos, yPos, xOff, yOff,radius) {
+
+    particleSound(xPos, yPos, radius) {
         this.panner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
             this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
         }
-        
+
     }
-   
+    
+    stopSound(xPos, yPos, radius) {
+        this.panner.pan.value = xPos / windowWidth * 2 - 1;
+        if (isFinite(radius)){
+            this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
+            
+        }
+
+    }
+
 }

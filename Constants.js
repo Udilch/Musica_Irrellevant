@@ -51,7 +51,7 @@ export const MODAL = {
             },
         },
 };
-export const COUNT_DOWN = 12;
+export const COUNT_DOWN = 10;
 export const OCTAVE = 12;
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
@@ -61,7 +61,7 @@ export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
 export const ROOT_LENGTH = 20;
-export const SCALE_LENGTH = 10;
+export const SCALE_LENGTH = 21;
 export const CHORD_LENGTH = 15;
 export const ROOT_FREQUENCY = 5;
 export const SCALE_FREQUENCY = 14;

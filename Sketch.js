@@ -33,6 +33,7 @@ import {
     animateChordParticle,
     animateRootParticle,
 } from './Modes.js';
+import Tone from 'tone';
 
 
 var state = 'caos';
@@ -41,6 +42,7 @@ var chordIndex = 0;
 var rootIndex = 0;
 
 export const setup = () => {
+    document.addEventListener('mouseover', Tone.context.resume());
     initCanvas();
     const particles = initParticles();
     initModes(particles);
@@ -55,7 +57,6 @@ document.addEventListener('touchstart', alterState);
 
 export const draw = () => {
     text(frameCount, width - 10, 12);
-
     state === 'caos' ? drawCaosFrame() : drawModeAnimationFrame(state);
 }
 

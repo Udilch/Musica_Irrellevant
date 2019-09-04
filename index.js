@@ -6,7 +6,6 @@ import Tone from 'tone';
 
 StartAudioContext(Tone.context).then(function(){
 	//started
-    Tone.context.latencyHint = 'playback';
 })
 window.setup = setup;
 window.draw = draw;

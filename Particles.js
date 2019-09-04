@@ -26,4 +26,3 @@ export const stopParticles = () =>
 
 export const drawParticles = () => particles.forEach(drawParticle);
 
-    

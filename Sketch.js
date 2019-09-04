@@ -32,6 +32,8 @@ import {
     animateScaleParticle,
     animateChordParticle,
     animateRootParticle,
+    sortParticlesByPosition,
+    xPosParticle,
 } from './Modes.js';
 import Tone from 'tone';
 
@@ -40,6 +42,7 @@ var state = 'caos';
 var melodyIndex = 0;
 var chordIndex = 0;
 var rootIndex = 0;
+var clickFrame = 0;
 
 export const setup = () => {
     document.addEventListener('mouseover', Tone.context.resume());
@@ -50,6 +53,7 @@ export const setup = () => {
 
 const alterState = () => {
     state = getRandomMode().name;
+    clickFrame = frameCount;
 }
 
 document.addEventListener('click', alterState);
@@ -70,8 +74,11 @@ const drawCaosFrame = () => {
 };
 
 const drawModeAnimationFrame = (mode) => {
-    document.removeEventListener('click', alterState);
-    document.removeEventListener('touchstart', alterState);
+    if (clickFrame + 1 === frameCount) {
+        document.removeEventListener('click', alterState);
+        document.removeEventListener('touchstart', alterState);
+        sortParticlesByPosition(mode);  
+    }
     
     // draw regular particles
     setCanvasColorsByMode(mode);
@@ -82,6 +89,7 @@ const drawModeAnimationFrame = (mode) => {
     setDefaultParticleColor();
     stopParticlesInMode(mode);
     drawParticlesInMode(mode);
+    
 
     if (frameShouldAnimateScaleParticle(frameCount)) {
         animateScaleParticle(mode, melodyIndex, frameCount);
@@ -98,7 +106,7 @@ const drawModeAnimationFrame = (mode) => {
     }
     
     if (frameShouldAnimateRootParticle(frameCount)) {
-        if (rootIndex === 5) {
+        if (rootIndex === getRootLength()) {
             rootIndex = getRandomNumber(5);
         }
         animateRootParticle(rootIndex, frameCount);
@@ -122,4 +130,4 @@ const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
 const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
 
 const frameShouldFinishModeAnimation = (melodyIndex, mode) =>
-    melodyIndex === COUNT_DOWN;
+    melodyIndex === getModeScaleLength(mode);

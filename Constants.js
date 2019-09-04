@@ -12,7 +12,7 @@ export const NOTES = [
 ];
 export const MODAL = {
     modalRoot: { root: 0, scale: [], },
-    chordInterval: [4,2,5,1],
+    chordInterval: [4, 2, 5, 1],
     modes: {
             ionian: {
                 name: "ionian", scale: [], sequence: [2, 2, 1, 2, 2, 2, 1],
@@ -60,11 +60,11 @@ export const PARTICLE_INCREMENT_FACTOR = 20;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
-export const ROOT_LENGTH = 20;
-export const SCALE_LENGTH = 21;
-export const CHORD_LENGTH = 15;
+export const ROOT_LENGTH = 16;
+export const SCALE_LENGTH = 1;
+export const CHORD_LENGTH = 6;
 export const ROOT_FREQUENCY = 5;
-export const SCALE_FREQUENCY = 14;
-export const CHORD_FREQUENCY = 3;
+export const SCALE_FREQUENCY = 7;
+export const CHORD_FREQUENCY = 2;
 export const DEFAULT_PARTICLE_COLOR = 'red';
 export const DEFAULT_BACKGROUND_COLOR = 'lightblue';

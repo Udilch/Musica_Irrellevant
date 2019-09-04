@@ -40,6 +40,7 @@ var state = 'caos';
 var melodyIndex = 0;
 var chordIndex = 0;
 var rootIndex = 0;
+var clickFrame = 0;
 
 export const setup = () => {
     document.addEventListener('mouseover', Tone.context.resume());
@@ -50,6 +51,7 @@ export const setup = () => {
 
 const alterState = () => {
     state = getRandomMode().name;
+    clickFrame = frameCount;
 }
 
 document.addEventListener('click', alterState);
@@ -70,8 +72,10 @@ const drawCaosFrame = () => {
 };
 
 const drawModeAnimationFrame = (mode) => {
-    document.removeEventListener('click', alterState);
-    document.removeEventListener('touchstart', alterState);
+    if (clickFrame + 1 === frameCount) {
+	   document.removeEventListener('click', alterState);
+	   document.removeEventListener('touchstart', alterState);  
+    }
     
     // draw regular particles
     setCanvasColorsByMode(mode);

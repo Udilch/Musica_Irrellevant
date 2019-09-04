@@ -33,13 +33,13 @@ import {
     animateChordParticle,
     animateRootParticle,
     sortParticlesByPosition,
-    xPosParticle,
 } from './Modes.js';
 import Tone from 'tone';
 
 
 var state = 'caos';
 var melodyIndex = 0;
+var count = 0;
 var chordIndex = 0;
 var rootIndex = 0;
 var clickFrame = 0;
@@ -92,8 +92,12 @@ const drawModeAnimationFrame = (mode) => {
     
 
     if (frameShouldAnimateScaleParticle(frameCount)) {
+        if (melodyIndex === getModeScaleLength(mode)) {
+            melodyIndex = 0;
+        }
         animateScaleParticle(mode, melodyIndex, frameCount);
         melodyIndex++;
+        count++;
     }
     
     if (frameShouldAnimateChordParticle(frameCount, mode)) {
@@ -113,9 +117,9 @@ const drawModeAnimationFrame = (mode) => {
         rootIndex++;
     }
 
-    if (frameShouldFinishModeAnimation(melodyIndex, mode)) {
+    if (frameShouldFinishModeAnimation(count, mode)) {
         state = 'caos';
-        melodyIndex = 0;
+        count = 0;
         document.addEventListener('click', alterState);
         document.addEventListener('touchstart', alterState);
     }
@@ -129,5 +133,5 @@ const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
 
 const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
 
-const frameShouldFinishModeAnimation = (melodyIndex, mode) =>
-    melodyIndex === getModeScaleLength(mode);
+const frameShouldFinishModeAnimation = (count, mode) =>
+    count === getModeScaleLength(mode);

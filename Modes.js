@@ -19,7 +19,7 @@ export const initModes = (particles) => {
                 note += grade;
             });
         }
-        note = MODAL.modalRoot.root + MODAL.modes[mode].grade + OCTAVE * 3;
+        note = MODAL.modalRoot.root + MODAL.modes[mode].grade + OCTAVE * 2;
         for (let i = 0; i <= 2; i++) {
             MODAL.chordInterval.forEach(interval => {
                 MODAL.modes[mode].modalChord.push(particles[note]);
@@ -58,10 +58,10 @@ export const sortParticlesByPosition = (mode) => {
 }
     
 export const animateScaleParticle = (mode, melodyIndex, frame) =>
-    MODAL.modes[mode].scale[melodyIndex].myParticleAnimation(frame, SCALE_LENGTH);
+    MODAL.modes[mode].scale[melodyIndex].myScaleAnimation(frame, SCALE_LENGTH);
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
-    MODAL.modes[mode].modalChord[chordIndex].myParticleAnimation(frame, CHORD_LENGTH);
+    MODAL.modes[mode].modalChord[chordIndex].myScaleAnimation(frame, CHORD_LENGTH);
 }
 
 export const animateRootParticle = (rootIndex, frame) => {
@@ -79,5 +79,3 @@ export const getModeScaleLength = mode => MODAL.modes[mode].scale.length;
 export const getModeChordLength = mode => MODAL.modes[mode].modalChord.length;
 
 export const getRootLength = () => MODAL.modalRoot.scale.length;
-
-export const xPosParticle = (mode, grade) => MODAL.modes[mode].scale[grade].xPos;

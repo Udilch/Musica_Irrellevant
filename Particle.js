@@ -4,7 +4,7 @@ import {
     PARTICLE_INCREMENT_FACTOR,
 } from './Constants';
 
-import Sound from './Sound';
+import { Sound, SoundScale } from './Sound';
 
 export default class Particle {
     constructor(note) {
@@ -18,7 +18,7 @@ export default class Particle {
         this.yPos = 0;
         this.noteLength = 0;
         this.initialFrame = 0;
-        this.sound=this.sound;
+        this.sound = this.sound;
     }
 
     update(frameCount, width, height) {
@@ -99,5 +99,14 @@ export default class Particle {
         this.initialFrame = initialFrame;
         this.noteLength = noteLength;
         this.sound = new Sound(this.note, this.noteLength);
+    }
+    
+    myScaleAnimation(initialFrame, noteLength) {
+        if (this.noteLength) {
+            this.finishAnimation();
+        }
+        this.initialFrame = initialFrame;
+        this.noteLength = noteLength;
+        this.sound = new SoundScale(this.note, this.noteLength);
     }
 };

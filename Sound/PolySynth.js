@@ -3,14 +3,43 @@ import fmSynth from "./FMSynth";
 import Master from "./Master";
 import scalePanner from "./Panner";
 
-export const polySynth = new Tone.PolySynth(6,fmSynth).chain(scalePanner, Master);
+export const polySynth = new Tone.PolySynth(7,Tone.FMSynth).chain(scalePanner,Master);
 
-export const polySynthTrigger = (note, length) => polySynth.triggerAttackRelease(note, length);
+polySynth.set({
+	"oscillator" : {
+		"type" : "sine"
+	},
+    "modulation" : {
+		"type" : "square"
+	}
+});
 
-export const fmSynthChangeModulationIndex = (radius) => fmSynth.modulationIndex.value = radius;
+console.log(polySynth.get());
 
-export const fmSynthChangeModulationEnvelope = (radius, max_radius) => fmSynth.modulationEnvelope.attack = radius * 10 / max_radius;
+export const polySynthTrigger = (note, length) => {
+    polySynth.triggerAttackRelease(note, length);
+}
 
-export const fmSynthChangePitch = (yPos, DETUNE_FACTOR) => fmSynth.detune.value = yPos * DETUNE_FACTOR;
+export const polySynthChangeModulationIndex = (radius) => polySynth.set({
+    "modulation" : {
+		"index" : radius
+	}
+});
 
-export const fmSynthChain = () => fmSynth.chain();
+export const polySynthChangeModulationEnvelope = (radius, max_radius) => {
+    let value = radius * 10 / max_radius;
+    polySynth.set({
+        "modulationEnvelope" : {
+		  "attack" : value
+        }
+    });
+    
+}
+
+export const polySynthChangePitch = (yPos, DETUNE_FACTOR) => {
+    let value = yPos * DETUNE_FACTOR;
+    polySynth.set({
+        "detune" : value
+    });
+}
+

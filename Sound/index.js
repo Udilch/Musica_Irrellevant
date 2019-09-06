@@ -3,14 +3,24 @@ import { DETUNE_FACTOR } from "./Constants";
 import Tone from 'tone';
 import Master from "./Master";
 import scalePanner from "./Panner";
+import {
+    envelopeTrigger,
+    fmOSC  
+} from "./FMOsc";
 import { 
+    fmSynth,
     fmSynthTrigger, 
     fmSynthChangeModulationEnvelope, 
     fmSynthChangeModulationIndex,
     fmSynthChangePitch,
     fmSynthChain,
 } from "./FMSynth";
-import {polySynthTrigger} from "./PolySynth";
+import {
+    polySynthTrigger,
+    polySynthChangeModulationIndex,
+    polySynthChangeModulationEnvelope,
+    polySynthChangePitch,
+} from "./PolySynth";
 
 export class Sound {
     constructor(note, noteLength) {
@@ -45,12 +55,10 @@ export class Sound {
             this.fmsynth.modulationEnvelope.attack = radius * 10 / MAXIMUM_RADIUS;
             
         }
-
     }
-
 }
 
-export class SoundScale {
+export class PolySound {
     constructor(note, noteLength) {
         this.note = note;
         this.noteLength = noteLength;
@@ -60,29 +68,57 @@ export class SoundScale {
     updateSound(xPos, yPos, radius) {
         scalePanner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
-            fmSynthChangeModulationIndex(radius);
-            fmSynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);
+            polySynthChangeModulationIndex(radius);
+            polySynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);
         }
-        fmSynthChangePitch(yPos, DETUNE_FACTOR);
+        polySynthChangePitch(yPos, DETUNE_FACTOR);
     }
 
     particleSound(xPos, yPos, radius) {
         scalePanner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
-            fmSynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);
+            polySynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);
         }
-
     }
     
     stopSound(xPos, yPos, radius) {
         scalePanner.pan.value = xPos / windowWidth * 2 - 1;
         if (isFinite(radius)){
-            fmSynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);
-            
+            polySynthChangeModulationEnvelope(radius, MAXIMUM_RADIUS);  
         }
+    }
+}
 
+export class FMSound {
+    constructor(note, noteLength) {
+        this.note = note;
+        this.noteLength = noteLength;
+        fmOSC.frequency.value = (this.note);
+        envelopeTrigger(this.noteLength / FRAME_RATE);
     }
 
+    updateSound(xPos, yPos, radius) {
+        scalePanner.pan.value = xPos / windowWidth * 2 - 1;
+        if (isFinite(radius)){
+            fmOSC.modulationIndex.value = radius;
+        }
+        fmOSC.detune.value = yPos * DETUNE_FACTOR;
+    }
+
+    particleSound(xPos, yPos, radius) {
+        scalePanner.pan.value = xPos / windowWidth * 2 - 1;
+        /*if (isFinite(radius)){
+            fmOSC.phase.value = radius * 10 / MAXIMUM_RADIUS;
+        }*/
+    }
+    
+    stopSound(xPos, yPos, radius) {
+        scalePanner.pan.value = xPos / windowWidth * 2 - 1;
+        /*if (isFinite(radius)){
+            fmOSC.phase.value = radius * 10 / MAXIMUM_RADIUS;
+            
+        }*/
+    }
 }
 
 

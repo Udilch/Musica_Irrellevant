@@ -65,7 +65,7 @@ export const animateChordParticle = (mode, chordIndex, frame) => {
 }
 
 export const animateRootParticle = (rootIndex, frame) => {
-    MODAL.modalRoot.scale[rootIndex].myParticleAnimation(frame, ROOT_LENGTH);
+    MODAL.modalRoot.scale[rootIndex].myScaleAnimation(frame, ROOT_LENGTH);
 }
     
 export const getRandomMode = () => {

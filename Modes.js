@@ -7,7 +7,7 @@ const modesLength = Object.keys(MODAL.modes).length;
 export const initModes = (particles) => {
     MODAL.modalRoot.root = getRandomNumber(11);
     let note = MODAL.modalRoot.root;
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i <= 5; i++) {
             MODAL.modalRoot.scale.push(particles[note]);
             note += OCTAVE;
     };
@@ -65,7 +65,7 @@ export const animateChordParticle = (mode, chordIndex, frame) => {
 }
 
 export const animateRootParticle = (rootIndex, frame) => {
-    MODAL.modalRoot.scale[rootIndex].myScaleAnimation(frame, ROOT_LENGTH);
+    MODAL.modalRoot.scale[rootIndex].startAnimation(frame, ROOT_LENGTH);
 }
     
 export const getRandomMode = () => {

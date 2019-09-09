@@ -1,3 +1,4 @@
+export const TITLE = [ 'M', 'U', 'S', 'I', 'C', 'A', 'I', 'R', 'R', 'E', 'L', 'L', 'E', 'V', 'A', 'N', 'T' ];
 export const NOTES = [
     "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0",
     "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1",
@@ -44,8 +45,8 @@ export const MODAL = {
                 modalChord:[], grade: 8, backgroundColor: 'pink',
                 color: 'white',
             },
-            locryan: {
-                name: "locryan", scale: [], sequence: [1, 2, 2, 1, 2, 2, 2],
+            locrian: {
+                name: "locrian", scale: [], sequence: [1, 2, 2, 1, 2, 2, 2],
                 modalChord:[], grade: 6, backgroundColor: 'black',
                 color: 'white',
             },
@@ -61,10 +62,10 @@ export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
 export const ROOT_LENGTH = 20;
-export const SCALE_LENGTH = 4;
-export const CHORD_LENGTH = 15;
+export const SCALE_LENGTH = 20;
+export const CHORD_LENGTH = 7;
 export const ROOT_FREQUENCY = 7;
-export const SCALE_FREQUENCY = 11;
+export const SCALE_FREQUENCY = 13;
 export const CHORD_FREQUENCY = 4;
 export const DEFAULT_PARTICLE_COLOR = 'red';
 export const DEFAULT_BACKGROUND_COLOR = 'lightblue';

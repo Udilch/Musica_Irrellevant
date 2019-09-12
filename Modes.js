@@ -42,31 +42,35 @@ export const stopParticlesInMode = (mode) => {
     MODAL.modalRoot.scale.forEach(particle =>
         particle.stopWhenInScale(width, height)
     ); 
-}
+};
 
 export const drawParticlesInMode = mode => {
     MODAL.modes[mode].scale.forEach(drawParticle);
     MODAL.modes[mode].modalChord.forEach(drawParticle);
     MODAL.modalRoot.scale.forEach(drawParticle); 
-}
+};
 
 export const sortParticlesByPosition = (mode) => { 
     MODAL.modes[mode].scale.sort((a,b) => (a.xPos > b.xPos) ? 1 : -1);
     MODAL.modes[mode].modalChord.sort((a,b) => (a.xPos > b.xPos) ? 1 : -1);
     MODAL.modalRoot.scale.sort((a,b) => (a.xPos > b.xPos) ? 1 : -1);
     
-}
+};
     
-export const animateScaleParticle = (mode, melodyIndex, frame) =>
-    MODAL.modes[mode].scale[melodyIndex].myScaleAnimation(frame, SCALE_LENGTH);
+export const animateScaleParticle = (mode, melodyIndex, frame) =>{
+    const noteScaleLength = Math.floor(MODAL.modes[mode].scale[melodyIndex].yPos * 25 / windowHeight);
+    MODAL.modes[mode].scale[melodyIndex].myScaleAnimation(frame, noteScaleLength);
+};
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
-    MODAL.modes[mode].modalChord[chordIndex].myScaleAnimation(frame, CHORD_LENGTH);
-}
+    const noteChordLength = Math.floor(MODAL.modes[mode].modalChord[chordIndex].yPos * 40 / windowHeight);
+    MODAL.modes[mode].modalChord[chordIndex].myScaleAnimation(frame, noteChordLength);
+};
 
 export const animateRootParticle = (rootIndex, frame) => {
-    MODAL.modalRoot.scale[rootIndex].startAnimation(frame, ROOT_LENGTH);
-}
+    const noteRootLength = Math.floor(MODAL.modalRoot.scale[rootIndex].yPos * 30 / windowHeight);
+    MODAL.modalRoot.scale[rootIndex].startAnimation(frame, noteRootLength);
+};
     
 export const getRandomMode = () => {
     const modesIndex = getRandomNumber(modesLength);
@@ -79,3 +83,5 @@ export const getModeScaleLength = mode => MODAL.modes[mode].scale.length;
 export const getModeChordLength = mode => MODAL.modes[mode].modalChord.length;
 
 export const getRootLength = () => MODAL.modalRoot.scale.length;
+
+export const speedFactor = () => Math.floor(MODAL.modalRoot.scale[0].xPos * 10 / windowWidth);

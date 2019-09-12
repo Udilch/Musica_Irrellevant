@@ -1,6 +1,5 @@
 import Tone from 'tone';
 import Master from "./Master";
-import scalePanner from "./Panner";
 
 export const fmSynth = new Tone.FMSynth();
 

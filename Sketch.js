@@ -15,7 +15,16 @@ import {
     setTitleCanvas,
     drawTitle,
     setInstruction,
+    canvasMousePressed,
+    canvasMouseClicked,
+    canvasMouseReleased,
+    resizeCanvas,
 } from './Canvas.js';
+import {
+    createInfo,
+    infoExpand,
+    infoCollapse,
+} from './Info.js';
 import {
     initParticles,
     activateRandomParticle,
@@ -36,9 +45,11 @@ import {
     animateChordParticle,
     animateRootParticle,
     sortParticlesByPosition,
+    speedFactor,
 } from './Modes.js';
 import StartAudioContext from 'startaudiocontext/StartAudioContext.js';
 import Tone from 'tone';
+
 
 var state = 'title';
 var melodyIndex = 0;
@@ -47,21 +58,23 @@ var chordIndex = 0;
 var rootIndex = 0;
 var clickFrame = 0;
 var instruction = 'measure';
+var note = 0;
 
 export const setup = () => {
     initCanvas();
+    createInfo();
     const particles = initParticles();
     initModes(particles);
-    document.addEventListener('click', start);
-    document.addEventListener('touchend', start);
+    canvasMouseClicked(start);
 }
 
 export const start = () => {
     state = 'caos';
     instruction = 'measure';
     StartAudioContext(Tone.context);
-    document.addEventListener('mousedown', alterState);
-    document.addEventListener('touchstart', alterState);
+    canvasMousePressed(alterState);
+    canvasMouseReleased(start);
+    canvas.addEventListener('touchstart', alterState);
 }
 
 export const alterState = () => {
@@ -78,6 +91,10 @@ export const draw = () => {
         drawCaosFrame();
     }
     else drawModeAnimationFrame(state);
+};
+
+export const windowResized = () => {
+    resizeCanvas(windowWidth, windowHeight);
 }
 
 const drawTitleFrame = () => {
@@ -97,8 +114,6 @@ const drawCaosFrame = () => {
 
 const drawModeAnimationFrame = (mode) => {
     if (clickFrame + 1 === frameCount) {
-        /*document.removeEventListener('click', alterState);
-        document.removeEventListener('touchstart', alterState);*/
         sortParticlesByPosition(mode);  
     }
     
@@ -122,7 +137,6 @@ const drawModeAnimationFrame = (mode) => {
         }
         animateScaleParticle(mode, melodyIndex, frameCount);
         melodyIndex++;
-        count++;
     }
     
     if (frameShouldAnimateChordParticle(frameCount, mode)) {
@@ -141,23 +155,16 @@ const drawModeAnimationFrame = (mode) => {
         animateRootParticle(rootIndex, frameCount);
         rootIndex++;
     }
-
-    /*if (frameShouldFinishModeAnimation(count, mode)) {
-        state = 'caos';
-        instruction = 'measure';
-        count = 0;
-        document.addEventListener('click', alterState);
-        document.addEventListener('touchstart', alterState);
-    }*/
 }
+
 const frameShouldActivateParticle = frame =>
-    frame % getRandomNumber(FRAME_RATE * ACTIVATION_FREQUENCY) === 0;
+    frame % getRandomNumber(FRAME_RATE * getRandomNumber(6)) === 0;
 
-const frameShouldAnimateRootParticle = frame => frame % ROOT_FREQUENCY === 0;
+const frameShouldAnimateRootParticle = frame => frame % (ROOT_FREQUENCY + speedFactor()) === 0;
 
-const frameShouldAnimateScaleParticle = frame => frame % SCALE_FREQUENCY === 0;
+const frameShouldAnimateScaleParticle = frame => frame % (SCALE_FREQUENCY + speedFactor()) === 0;
 
-const frameShouldAnimateChordParticle = (frame, mode) => frame % CHORD_FREQUENCY === 0;
+const frameShouldAnimateChordParticle = (frame, mode) => frame % (CHORD_FREQUENCY + speedFactor()) === 0;
 
 const frameShouldFinishModeAnimation = (count, mode) =>
     count === getModeScaleLength(mode);

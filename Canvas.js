@@ -1,11 +1,12 @@
 import { FRAME_RATE, MODAL, DEFAULT_PARTICLE_COLOR, DEFAULT_BACKGROUND_COLOR, TITLE } from "./Constants";
-import img from './Images/ActivarSo.svg';
 import { getRandomMode } from './Modes.js';
 import { getRandomNumber } from './Util.js';
 
+var canvas;
+
 export const initCanvas = () => {
     noCursor();
-    createCanvas(windowWidth, windowHeight);
+    canvas = createCanvas(windowWidth, windowHeight);
     fill(240, 255, 180);
     frameRate(FRAME_RATE);
     strokeWeight(1);
@@ -14,17 +15,35 @@ export const initCanvas = () => {
     textAlign(RIGHT);
 }
 
+export const windowResized = () => {
+    resizeCanvas(windowWidth, windowHeight);
+};
+
+export const canvasMouseClicked = (action) => {
+    canvas.mouseClicked(action);
+    canvas.touchStarted(action);
+}
+
+export const canvasMousePressed = (action) => {
+    canvas.mousePressed(action);
+    canvas.touchStarted(action);
+}
+
+export const canvasMouseReleased = (action) => {
+    canvas.mouseReleased(action);
+    canvas.touchEnded(action);
+}
+
 export const drawParticle = particle => {
     ellipse(particle.xPos, particle.yPos, particle.radius, particle.radius);
 }
 
 export const setInstruction = (instruction) => {
     if (!instruction) {
-        ellipse(mouseX,mouseY);
-        text('start', mouseX, mouseY-100);  
+        text('start', mouseX, mouseY);  
     }
     textSize(40);
-    text(instruction, mouseX, mouseY - 100);
+    text(instruction, mouseX, mouseY);
 }
 
 export const setTitleCanvas = () => {

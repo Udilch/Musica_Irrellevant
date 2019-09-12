@@ -4,3 +4,27 @@ canvas {
     z-index: -1;
     left: 0px;
 }
+
+div {
+    position: relative;
+    float: right;
+    background-color: white; 
+    z-index: 0;
+    padding: 0.7rem;
+    color: red;
+    font-family: monospace;
+}
+
+a:link {
+    color: red; 
+}
+
+a:visited {
+    color: red;
+}
+
+a:hover {
+    color: lightblue;
+}
+
+

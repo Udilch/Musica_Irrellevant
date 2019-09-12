@@ -1,8 +1,7 @@
 import Tone from 'tone';
 import Master from "./Master";
-import scalePanner from "./Panner";
 
-export const polySynth = new Tone.PolySynth(7,Tone.Synth).chain(Master);
+export const polySynth = new Tone.PolySynth(10, Tone.Synth).chain(Master);
 
 polySynth.set({
 	"oscillator" : {
@@ -10,8 +9,6 @@ polySynth.set({
 	},
     "volume" : 0
 });
-
-console.log(polySynth.get());
 
 export const polySynthTrigger = (note, length) => {
     polySynth.triggerAttackRelease(note, length);
@@ -29,12 +26,11 @@ export const polySynthChangeModulationEnvelope = (radius, max_radius) => {
         "modulationEnvelope" : {
 		  "attack" : value
         }
-    });
-    
+    }); 
 }
 
-export const polySynthChangePitch = (yPos, DETUNE_FACTOR) => {
-    let value = yPos * DETUNE_FACTOR;
+export const polySynthChangePitch = (yPos) => {
+    let value = yPos;
     polySynth.set({
         "detune" : value * 2
     });

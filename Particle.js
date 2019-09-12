@@ -82,7 +82,7 @@ export default class Particle {
         if (!this.noteLength) {
             this.initialFrame = initialFrame;
             this.noteLength = noteLength;
-            this.sound = new Sound(this.note, noteLength);
+            this.sound = new Sound(this.note, this.noteLength);
         }
     }
 
@@ -98,7 +98,7 @@ export default class Particle {
         }
         this.initialFrame = initialFrame;
         this.noteLength = noteLength;
-        this.sound = new Sound(this.note, this.noteLength);
+        this.sound = new Sound(this.note, this.noteLength, this.initialFrame);
     }
     
     myScaleAnimation(initialFrame, noteLength) {
@@ -108,14 +108,5 @@ export default class Particle {
         this.initialFrame = initialFrame;
         this.noteLength = noteLength;
         this.sound = new PolySound(this.note, this.noteLength);
-    }
-    
-    myRootAnimation(initialFrame, noteLength) {
-        if (this.noteLength) {
-            this.finishAnimation();
-        }
-        this.initialFrame = initialFrame;
-        this.noteLength = noteLength;
-        this.sound = new FMSound(this.note, this.noteLength);
     }
 };

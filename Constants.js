@@ -1,3 +1,4 @@
+export const TITLE = [ 'M', 'U', 'S', 'I', 'C', 'A', 'I', 'R', 'R', 'E', 'L', 'L', 'E', 'V', 'A', 'N', 'T' ];
 export const NOTES = [
     "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0",
     "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1",
@@ -10,21 +11,61 @@ export const NOTES = [
     "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8",
     "C9"
 ];
+export const MODAL = {
+    modalRoot: { root: 0, scale: [], },
+    chordInterval: [4, 2, 5, 1],
+    modes: {
+            ionian: {
+                name: "ionian", scale: [], sequence: [2, 2, 1, 2, 2, 2, 1],
+                modalChord:[], grade: 5, backgroundColor: '#018C36',
+                color: 'white',
+            },
+            dorian: {
+                name: "dorian", scale: [], sequence: [2, 1, 2, 2, 2, 1, 2],
+                modalChord:[], grade: 3, backgroundColor: 'grey',
+                color: 'white',
+            },
+            phrygian: {
+                name: "phrygian", scale: [], sequence: [1, 2, 2, 2, 1, 2, 2],
+                modalChord:[], grade: 1, backgroundColor: '#FEE119',
+                color: 'white',
+            },
+            lydian: {
+                name: "lydian", scale: [], sequence: [2, 2, 2, 1, 2, 2, 1],
+                modalChord:[], grade: 0, backgroundColor: '#F68614',
+                color: 'white',
+            },
+            mixolydian: {
+                name: "mixolydian", scale: [], sequence: [2, 2, 1, 2, 2, 1, 2],
+                modalChord:[], grade: 10, backgroundColor: '#0B33BC',
+                color: 'white',
+            },
+            aeolyan: {
+                name: "aeolyan", scale: [], sequence: [2, 1, 2, 2, 1, 2, 2],
+                modalChord:[], grade: 8, backgroundColor: '#EFC3C3',
+                color: 'white',
+            },
+            locrian: {
+                name: "locrian", scale: [], sequence: [1, 2, 2, 1, 2, 2, 2],
+                modalChord:[], grade: 6, backgroundColor: '#000000',
+                color: 'white',
+            },
+        },
+};
+export const COUNT_DOWN = 10;
+export const OCTAVE = 12;
 export const INITIAL_RADIUS = 2;
 export const MAXIMUM_RADIUS = 12;
 export const FRAME_RATE = 30;
-export const PARTICLE_INCREMENT_FACTOR = 10;
+export const PARTICLE_INCREMENT_FACTOR = 30;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
-export const STATE = 'caos';
-export const DAMPENING_VALUE = 1000;
-export const ROOM_SIZE_VALUE = 0.8;
-export const EQ_LOW = -20;
-export const EQ_MID = -30;
-export const EQ_HI = -25;
-export const DETUNE_FACTOR = -2;
-export const ROOT_LENGTH = 100;
-export const SCALE_LENGTH = 20;
-export const ROOT_FREQUENCY = 200;
-export const SCALE_FREQUENCY = 6;
-
+export const ROOT_INDEX = 12;
+export const ROOT_LENGTH = 30;
+export const SCALE_LENGTH = 25;
+export const CHORD_LENGTH = 40;
+export const ROOT_FREQUENCY = 5;
+export const SCALE_FREQUENCY = 7;
+export const CHORD_FREQUENCY = 2;
+export const DEFAULT_PARTICLE_COLOR = '#FF0200';
+export const DEFAULT_BACKGROUND_COLOR = '#AED8E6';

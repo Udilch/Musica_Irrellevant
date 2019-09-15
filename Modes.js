@@ -1,5 +1,5 @@
 import { getRandomNumber } from "./Util";
-import { MODAL, SCALE_LENGTH, CHORD_LENGTH, OCTAVE, ROOT_LENGTH } from "./Constants";
+import { MODAL, SCALE_LENGTH, CHORD_LENGTH, OCTAVE, ROOT_LENGTH, NOTES } from "./Constants";
 import { drawParticle } from "./Canvas";
 
 const modesLength = Object.keys(MODAL.modes).length;
@@ -58,17 +58,17 @@ export const sortParticlesByPosition = (mode) => {
 };
     
 export const animateScaleParticle = (mode, melodyIndex, frame) =>{
-    const noteScaleLength = Math.floor(MODAL.modes[mode].scale[melodyIndex].yPos * 25 / windowHeight);
+    const noteScaleLength = Math.floor(MODAL.modes[mode].scale[melodyIndex].yPos * SCALE_LENGTH / windowHeight);
     MODAL.modes[mode].scale[melodyIndex].myScaleAnimation(frame, noteScaleLength);
 };
 
 export const animateChordParticle = (mode, chordIndex, frame) => {
-    const noteChordLength = Math.floor(MODAL.modes[mode].modalChord[chordIndex].yPos * 40 / windowHeight);
+    const noteChordLength = Math.floor(MODAL.modes[mode].modalChord[chordIndex].yPos * ROOT_LENGTH / windowHeight);
     MODAL.modes[mode].modalChord[chordIndex].myScaleAnimation(frame, noteChordLength);
 };
 
 export const animateRootParticle = (rootIndex, frame) => {
-    const noteRootLength = Math.floor(MODAL.modalRoot.scale[rootIndex].yPos * 30 / windowHeight);
+    const noteRootLength = Math.floor(MODAL.modalRoot.scale[rootIndex].yPos * ROOT_LENGTH / windowHeight);
     MODAL.modalRoot.scale[rootIndex].startAnimation(frame, noteRootLength);
 };
     
@@ -77,6 +77,14 @@ export const getRandomMode = () => {
     const mode = Object.keys(MODAL.modes)[modesIndex];
     return MODAL.modes[mode];
 };
+
+export const rootName = () => {
+    var root = MODAL.modalRoot.scale[0].note.slice(0,-1);
+    if (root.length === 2) {
+        root = `${root} / ${NOTES[MODAL.modalRoot.root + 1].slice(0, -1)}♭`;
+    }
+    return root;
+}
 
 export const getModeScaleLength = mode => MODAL.modes[mode].scale.length;
 

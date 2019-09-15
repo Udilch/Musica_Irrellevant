@@ -17,7 +17,7 @@ export const MODAL = {
     modes: {
             ionian: {
                 name: "ionian", scale: [], sequence: [2, 2, 1, 2, 2, 2, 1],
-                modalChord:[], grade: 5, backgroundColor: 'green',
+                modalChord:[], grade: 5, backgroundColor: '#018C36',
                 color: 'white',
             },
             dorian: {
@@ -27,27 +27,27 @@ export const MODAL = {
             },
             phrygian: {
                 name: "phrygian", scale: [], sequence: [1, 2, 2, 2, 1, 2, 2],
-                modalChord:[], grade: 1, backgroundColor: 'yellow',
+                modalChord:[], grade: 1, backgroundColor: '#FEE119',
                 color: 'white',
             },
             lydian: {
                 name: "lydian", scale: [], sequence: [2, 2, 2, 1, 2, 2, 1],
-                modalChord:[], grade: 0, backgroundColor: 'orange',
+                modalChord:[], grade: 0, backgroundColor: '#F68614',
                 color: 'white',
             },
             mixolydian: {
                 name: "mixolydian", scale: [], sequence: [2, 2, 1, 2, 2, 1, 2],
-                modalChord:[], grade: 10, backgroundColor: 'blue',
+                modalChord:[], grade: 10, backgroundColor: '#0B33BC',
                 color: 'white',
             },
             aeolyan: {
                 name: "aeolyan", scale: [], sequence: [2, 1, 2, 2, 1, 2, 2],
-                modalChord:[], grade: 8, backgroundColor: 'pink',
+                modalChord:[], grade: 8, backgroundColor: '#EFC3C3',
                 color: 'white',
             },
             locrian: {
                 name: "locrian", scale: [], sequence: [1, 2, 2, 1, 2, 2, 2],
-                modalChord:[], grade: 6, backgroundColor: 'black',
+                modalChord:[], grade: 6, backgroundColor: '#000000',
                 color: 'white',
             },
         },
@@ -61,11 +61,11 @@ export const PARTICLE_INCREMENT_FACTOR = 30;
 export const ACTIVATION_FREQUENCY = 2;
 export const NOTE_LENGTH_FACTOR = 2;
 export const ROOT_INDEX = 12;
-export const ROOT_LENGTH = 20;
-export const SCALE_LENGTH = 20;
-export const CHORD_LENGTH = 7;
+export const ROOT_LENGTH = 30;
+export const SCALE_LENGTH = 25;
+export const CHORD_LENGTH = 40;
 export const ROOT_FREQUENCY = 5;
 export const SCALE_FREQUENCY = 7;
 export const CHORD_FREQUENCY = 2;
-export const DEFAULT_PARTICLE_COLOR = 'red';
-export const DEFAULT_BACKGROUND_COLOR = 'lightblue';
+export const DEFAULT_PARTICLE_COLOR = '#FF0200';
+export const DEFAULT_BACKGROUND_COLOR = '#AED8E6';

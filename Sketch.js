@@ -15,10 +15,11 @@ import {
     setTitleCanvas,
     drawTitle,
     setInstruction,
-    canvasMousePressed,
-    canvasMouseClicked,
-    canvasMouseReleased,
-    resizeCanvas,
+    canvasTouched,
+    canvasPressed,
+    canvasClicked,
+    canvasReleased,
+    mouseMoved,
 } from './Canvas.js';
 import {
     createInfo,
@@ -65,16 +66,17 @@ export const setup = () => {
     createInfo();
     const particles = initParticles();
     initModes(particles);
-    canvasMouseClicked(start);
+    canvasClicked(start);  
 }
 
 export const start = () => {
     state = 'caos';
     instruction = 'measure';
-    StartAudioContext(Tone.context);
-    canvasMousePressed(alterState);
-    canvasMouseReleased(start);
-    canvas.addEventListener('touchstart', alterState);
+    StartAudioContext(Tone.context).then(function(){
+        //started  
+    });
+    canvasPressed(alterState);
+    canvasReleased(start);
 }
 
 export const alterState = () => {
